@@ -1,0 +1,47 @@
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
+
+module.exports = {
+  watchOptions: {
+    ignored: '**/node_modules/',
+  },
+  entry: ['./src/scripts/game.js'],
+  output: {
+    path: path.resolve(__dirname, '../dist'),
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].chunk.js',
+  },
+  resolve: {
+    extensions: ['.js'],
+  },
+  module: {
+    rules: [{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }],
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+          filename: '[name].bundle.js',
+        },
+      },
+    },
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      gameName: 'Title Here',
+      template: 'src/index.html',
+    }),
+    new webpack.DefinePlugin({
+      'typeof CANVAS_RENDERER': JSON.stringify(true),
+      'typeof WEBGL_RENDERER': JSON.stringify(true),
+      'typeof EXPERIMENTAL': JSON.stringify(false),
+      'typeof PLUGIN_CAMERA3D': JSON.stringify(false),
+      'typeof PLUGIN_FBINSTANT': JSON.stringify(false),
+      'typeof FEATURE_SOUND': JSON.stringify(true),
+    }),
+  ],
+}
