@@ -4,11 +4,27 @@ export default class TitleScene extends Phaser.Scene {
   }
   preload() {
     // load feedback images (check? x? sparks?)
+    this.load.spritesheet('stimuli', 'assets/stim-sprite-sheet.png', {
+      frameWidth: 100,
+      frameHeight: 100,
+      endFrame: 23,
+    })
   }
   create() {
     let height = this.game.config.height
     let center = height / 2
     let user_config = this.game.user_config
+
+    var config = {
+      key: 'test',
+      frames: this.anims.generateFrameNumbers('stimuli', { start: 0, end: 23 }),
+      frameRate: 5,
+      repeat: -1,
+    }
+
+    this.anims.create(config)
+
+    this.add.sprite(center, center, 'stimuli').setScale(2).play('test')
 
     this.add
       .text(center, center - 200, 'TITLE', {
@@ -46,10 +62,20 @@ export default class TitleScene extends Phaser.Scene {
       yoyo: true,
     })
 
+    // we do a pointer event so that it counts as a page interaction (& fullscreen
+    // is allowed to kick in)
     this.input.once('pointerdown', (ptr) => {
-      // I wish I could do both at the same time, but after the fullscreen
-      // comes on it releases the pointer lock?? At least on FF, chrome does fine
-      // this.input.mouse.requestPointerLock()
+      // https://supernapie.com/blog/hiding-the-mouse-in-a-ux-friendly-way/
+      // we don't need the cursor, but we also don't need pointer lock or the like
+      let canvas = this.sys.canvas
+      canvas.style.cursor = 'none'
+      canvas.addEventListener('mousemove', () => {
+        canvas.style.cursor = 'default'
+        clearTimeout(mouseHideTO)
+        let mouseHideTO = setTimeout(() => {
+          canvas.style.cursor = 'none'
+        }, 1000)
+      })
       this.flash.stop()
       this.scale.startFullscreen()
       this.tweens.addCounter({
@@ -61,13 +87,9 @@ export default class TitleScene extends Phaser.Scene {
           this.cameras.main.setAlpha(v / 255)
         },
         onComplete: () => {
-          this.input.mouse.requestPointerLock()
           this.scene.start('MainScene')
         },
       })
     })
-    // this.input.once('pointerup', (ptr) => {
-    //   this.input.mouse.requestPointerLock()
-    // })
   }
 }

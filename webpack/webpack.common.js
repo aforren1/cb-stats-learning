@@ -1,12 +1,13 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = {
   watchOptions: {
     ignored: '**/node_modules/',
   },
-  entry: ['./src/scripts/game.js'],
+  entry: ['./src/game.js'],
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].bundle.js',
@@ -34,6 +35,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       gameName: 'Title Here',
       template: 'src/index.html',
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'src/assets', to: 'assets' },
+        { from: 'src/icons', to: 'icons' },
+      ],
     }),
     new webpack.DefinePlugin({
       'typeof CANVAS_RENDERER': JSON.stringify(true),

@@ -13,6 +13,7 @@ let small_dim = 800 // nothing's going to be perfectly scaled, but that's fine?
 const phaser_config = {
   type: Phaser.AUTO,
   backgroundColor: '#111111',
+  pixelArt: true,
   scale: {
     parent: 'phaser-game',
     mode: Phaser.Scale.FIT,
