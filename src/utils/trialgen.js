@@ -122,36 +122,32 @@ export default function makeTrials(debug) {
   // respect repeats across thirds boundaries
   let base = Array(8).fill([0, 1, 2, 3]).flat()
   let triplet_sequence = []
-  loop1: for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 3; i++) {
     loop2: while (true) {
       shuffleArray(base)
       // check constraints
-      loop3: for (let idx = 0; idx < base.length; idx++) {
+      // check thirds violations
+      let len = triplet_sequence.length
+      if (base[0] === triplet_sequence[len - 1]) {
+        continue loop2
+      }
+      if (base[1] === triplet_sequence[len - 1] && base[0] === triplet_sequence[len - 2]) {
+        continue loop2
+      }
+      for (let idx = 1; idx < base.length; idx++) {
         // AA not allowed
-        if (idx > 0 && base[idx] === base[idx - 1]) {
+        if (base[idx] === base[idx - 1]) {
           continue loop2
         }
         // ABAB not allowed
         if (idx > 2 && base[idx] === base[idx - 2] && base[idx - 1] === base[idx - 3]) {
           continue loop2
         }
-        // check thirds violations
-        if (triplet_sequence.length > 0) {
-          // AA not allowed
-          let len = triplet_sequence.length
-          if (base[idx] === triplet_sequence[len - 1]) {
-            continue loop2
-          }
-          if (idx > 0 && base[idx] === triplet_sequence[len - 1] && base[idx - 1] === triplet_sequence[len - 2]) {
-            continue loop2
-          }
-        }
       }
       break loop2
     }
     // make a copy so we can reuse base
-    triplet_sequence.push(base.slice())
+    triplet_sequence = triplet_sequence.concat(base)
   }
-  // should be good to go now, flatten the sequence
-  triplet_sequence = triplet_sequence.flat()
+  // should be good to go now
 }
