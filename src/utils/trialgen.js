@@ -25,8 +25,8 @@ For practice/exposure:
 For test:
 {
     trial_type
-    left_triplet (e.g. ABC)
-    right_triplet (e.g. LMN)
+    familiar_triplet (e.g. ABC)
+    foil_triplet (e.g. LMN)
     first_side_shown (left/right)
     familiar_side (left/right) (foil on opposite side)
     // user data
@@ -42,6 +42,9 @@ function shuffleArray(array) {
   }
 }
 
+function randCoord() {
+  return { x: Math.round(Math.random() * 100 - 50), y: Math.round(Math.random() * 100 - 50) }
+}
 const stim_ids = 'ABCDEFGHIJKLMNOPQRSTUVWX'
 export default function makeTrials(debug) {
   // first, generate the triplets of interest
@@ -76,7 +79,7 @@ export default function makeTrials(debug) {
   shuffleArray(practice_stim)
   let tmp_inds = [1, 4, 7, 8]
   for (let i of practice_stim) {
-    let pos = tmp_inds.includes(trial_counter) ? [Math.random() * 100 - 50, Math.random() * 100 - 50] : null
+    let pos = tmp_inds.includes(trial_counter) ? randCoord() : null
     trial_list.push({
       trial_type: 'practice',
       stimulus_index: stim_ids.indexOf(i),
@@ -86,9 +89,8 @@ export default function makeTrials(debug) {
       feedback_time: 500,
       iti_time: 1000,
       triplet_id: null,
-      trial_number: trial_counter,
+      trial_number: trial_counter++,
     })
-    trial_counter++
   }
   // practice 2 (harder, no feedback)
   trial_list.push({
@@ -96,9 +98,9 @@ export default function makeTrials(debug) {
     instruct_type: 'faster_practice',
   })
   shuffleArray(practice_stim)
-  let tmp_inds = [12, 13, 15, 16]
+  tmp_inds = [12, 13, 15, 16]
   for (let i of practice_stim) {
-    let pos = tmp_inds.includes(trial_counter) ? [Math.random() * 100 - 50, Math.random() * 100 - 50] : null
+    let pos = tmp_inds.includes(trial_counter) ? randCoord() : null
     trial_list.push({
       trial_type: 'practice',
       stimulus_index: stim_ids.indexOf(i),
@@ -108,9 +110,8 @@ export default function makeTrials(debug) {
       feedback_time: null,
       iti_time: 500,
       triplet_id: null,
-      trial_number: trial_counter,
+      trial_number: trial_counter++,
     })
-    trial_counter++
   }
   // exposure
   trial_list.push({
@@ -149,5 +150,72 @@ export default function makeTrials(debug) {
     // make a copy so we can reuse base
     triplet_sequence = triplet_sequence.concat(base)
   }
-  // should be good to go now
+  // sequence of triplets should be good to go now
+  // expand to trials
+  let num_cover = Math.ceil(3 * triplet_sequence.length * 0.2)
+  let num_not = 3 * triplet_sequence.length - num_cover
+  let cover_true = Array(num_cover).fill(true)
+  let cover_false = Array(num_not).fill(false)
+  let cover_arr = cover_true.concat(cover_false)
+  let cover_counter = 0
+  shuffleArray(cover_arr)
+  // loop over sequence of triplets
+  for (let triplet_idx of triplet_sequence) {
+    // loop within triplet
+    let tmp_triplet = familiar_triplets[triplet_idx]
+    for (let stim_idx of tmp_triplet) {
+      let pos = cover_arr[cover_counter++] ? randCoord() : null
+      trial_list.push({
+        trial_type: 'exposure',
+        stimulus_index: stim_ids.indexOf(stim_idx),
+        stimulus_id: stim_idx,
+        cover_pos: pos,
+        exposure_time: 500,
+        feedback_time: null,
+        iti_time: 500,
+        triplet_id: tmp_triplet.join(''),
+        trial_number: trial_counter++,
+      })
+    }
+  }
+
+  // test phase
+  trial_list.push({
+    trial_type: 'instruct',
+    instruct_type: 'test',
+  })
+
+  // all combinations of familiar x foil, repeated twice (for 32 total trials)
+  let combos_1 = []
+  let combos_2 = []
+  let tmp = 0
+  let first_side_1 = Array(8).fill(['left', 'right']).flat()
+  let first_side_2 = Array(8).fill(['left', 'right']).flat()
+  shuffleArray(first_side_1)
+  shuffleArray(first_side_2)
+
+  for (let fam of familiar_triplets) {
+    for (let foil of foil_triplets) {
+      let foo = ['left', 'right']
+      if (tmp % 2 === 1) {
+        foo = ['right', 'left']
+      }
+      combos_1.push({
+        familiar_triplet: fam,
+        foil_triplet: foil,
+        familiar_side: foo[0],
+        first_side: first_side_1[tmp],
+      })
+      combos_2.push({
+        familiar_triplet: fam,
+        foil_triplet: foil,
+        familiar_side: foo[1],
+        first_side: first_side_2[tmp],
+      })
+
+      tmp++
+    }
+  }
+
+  // shuffle first section (no specific restrictions on order AFAIK?)
 }
