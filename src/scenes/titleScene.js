@@ -9,6 +9,9 @@ export default class TitleScene extends Phaser.Scene {
       frameHeight: 100,
       endFrame: 23,
     })
+    this.load.image('check', 'assets/check_small.png')
+    this.load.image('x', 'assets/x_small.png')
+    this.load.image('noise', 'assets/white_noise.png')
   }
   create() {
     let height = this.game.config.height
@@ -77,7 +80,7 @@ export default class TitleScene extends Phaser.Scene {
         }, 1000)
       })
       this.flash.stop()
-      this.scale.startFullscreen()
+      //this.scale.startFullscreen()
       this.tweens.addCounter({
         from: 255,
         to: 0,

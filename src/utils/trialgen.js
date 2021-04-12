@@ -5,7 +5,8 @@ For instructions:
     instruct_type (initial_practice, faster_practice, exposure, test (end will be baked in))
     ~instruct_text~ (would want to embed, but we want to give user-specific feedback for first practice & no great sprintf equivalent in JS)
     // user data (necessary? probably nice-to-have in case excessive time between exposure & test...)
-    start_time (relative to beginning of section)
+    trial_start_time
+    response_time (relative to beginning of section)
 }
 For practice/exposure:
 {
@@ -18,6 +19,7 @@ For practice/exposure:
     iti_time (millis)
     triplet_id (e.g. ABC, DEG) ()
     // user data
+    trial_start_time
     reaction_time(s) (list of millis or null if no resp)
     correct (pressed & cover image present, no press & cover image absent)
 }
@@ -43,6 +45,7 @@ function shuffleArray(array) {
 }
 
 function randCoord() {
+  // TODO: adjust during debug
   return { x: Math.round(Math.random() * 100 - 50), y: Math.round(Math.random() * 100 - 50) }
 }
 const stim_ids = 'ABCDEFGHIJKLMNOPQRSTUVWX'
@@ -75,6 +78,8 @@ export default function makeTrials(debug) {
   trial_list.push({
     trial_type: 'instruct',
     instruct_type: 'initial_practice',
+    instruct_text:
+      'In this study, you will see a sequence of images. Whenever you see\n\n[img=noise]\n\n\n\noverlaid, press the space bar.',
   })
   shuffleArray(practice_stim)
   let tmp_inds = [1, 4, 7, 8]
@@ -99,6 +104,8 @@ export default function makeTrials(debug) {
   trial_list.push({
     trial_type: 'instruct',
     instruct_type: 'faster_practice',
+    instruct_text:
+      'Great job! We will do one more practice round. This time, the images will change more quickly. Do your best, and remember to press the space bar whenever you see this image:\n\n[img=noise]\n\n\n ',
   })
   shuffleArray(practice_stim)
   tmp_inds = [12, 13, 15, 16]
@@ -123,6 +130,8 @@ export default function makeTrials(debug) {
   trial_list.push({
     trial_type: 'instruct',
     instruct_type: 'exposure',
+    instruct_text:
+      'Excellent, just two sections to go. This next section will be the same as the previous section, except we will show many images (should take about five minutes).',
   })
   // generate order of triplets (AA and ABAB disallowed)
   // divide section into thirds, so 8 triplet repeats per third
@@ -185,12 +194,14 @@ export default function makeTrials(debug) {
     }
   }
   if (debug) {
-    trial_list.splice(-280, 280)
+    trial_list.splice(-284, 284)
   }
   // test phase
   trial_list.push({
     trial_type: 'instruct',
     instruct_type: 'test',
+    instruct_text:
+      'One more section to go!\n\nIn this section, we will see if one set of images is [color=yellow]more familiar[/color] to you than another set. ',
   })
 
   // all combinations of familiar x foil, repeated twice (for 32 total trials)
@@ -209,14 +220,26 @@ export default function makeTrials(debug) {
       combos_1.push({
         trial_type: 'test',
         familiar_triplet: fam,
+        familiar_indices: fam.map((e) => {
+          return stim_ids.indexOf(e)
+        }),
         foil_triplet: foil,
+        foil_indices: foil.map((e) => {
+          return stim_ids.indexOf(e)
+        }),
         familiar_side: foo[0],
         first_side: first_side_1[tmp],
       })
       combos_2.push({
         trial_type: 'test',
         familiar_triplet: fam,
+        familiar_indices: fam.map((e) => {
+          return stim_ids.indexOf(e)
+        }),
         foil_triplet: foil,
+        foil_indices: foil.map((e) => {
+          return stim_ids.indexOf(e)
+        }),
         familiar_side: foo[1],
         first_side: first_side_2[tmp],
       })
