@@ -33,7 +33,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      gameName: 'Title Here',
+      gameName: 'Find the Patch',
       template: 'src/index.html',
     }),
     new CopyWebpackPlugin({
