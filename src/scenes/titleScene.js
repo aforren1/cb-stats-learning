@@ -4,48 +4,24 @@ export default class TitleScene extends Phaser.Scene {
   }
   preload() {
     // load feedback images (check? x? sparks?)
-    this.load.spritesheet('stimuli', 'assets/stim-sprite-sheet.png', {
-      frameWidth: 100,
-      frameHeight: 100,
+    this.load.spritesheet('stimuli', 'assets/ss.png', {
+      frameWidth: 200,
+      frameHeight: 200,
       endFrame: 23,
+      spacing: 4,
     })
     this.load.image('check', 'assets/check_small.png')
     this.load.image('x', 'assets/x_small.png')
     this.load.image('noise', 'assets/white_noise.png')
+    this.load.image('arrow', 'assets/arrow.png')
   }
   create() {
     let height = this.game.config.height
     let center = height / 2
     let user_config = this.game.user_config
 
-    var config = {
-      key: 'test',
-      frames: this.anims.generateFrameNumbers('stimuli', { start: 0, end: 23 }),
-      frameRate: 5,
-      repeat: -1,
-    }
-
-    this.anims.create(config)
-
-    this.add.sprite(center, center, 'stimuli').setScale(2).play('test')
-
-    this.add
-      .text(center, center - 200, 'TITLE', {
-        fontSize: 160,
-        fill: true,
-        fontFamily: 'Arial',
-        strokeThickness: 2,
-        shadow: {
-          blur: 1,
-          color: '#ffffff',
-          stroke: true,
-          fill: true,
-        },
-      })
-      .setOrigin(0.5, 0.5)
-
     let start_txt = this.add
-      .text(center, center + 200, 'Click the left mouse\nbutton to start.', {
+      .text(center, center, 'Click the left mouse\nbutton to start.', {
         fontFamily: 'Verdana',
         fontStyle: 'bold',
         fontSize: 60,

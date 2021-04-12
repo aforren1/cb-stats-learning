@@ -46,7 +46,7 @@ function shuffleArray(array) {
 
 function randCoord() {
   // TODO: adjust during debug
-  return { x: Math.round(Math.random() * 100 - 50), y: Math.round(Math.random() * 100 - 50) }
+  return { x: Math.round(Math.random() * 200 - 100), y: Math.round(Math.random() * 200 - 100) }
 }
 const stim_ids = 'ABCDEFGHIJKLMNOPQRSTUVWX'
 export default function makeTrials(debug) {
@@ -79,7 +79,7 @@ export default function makeTrials(debug) {
     trial_type: 'instruct',
     instruct_type: 'initial_practice',
     instruct_text:
-      'In this study, you will see a sequence of images. Whenever you see\n\n[img=noise]\n\n\n\noverlaid, press the space bar.',
+      'In this study, you will see a sequence of images. Whenever you see\n\n[img=noise]\n\n\noverlaid, press the [color=yellow]spacebar[/color].',
   })
   shuffleArray(practice_stim)
   let tmp_inds = [1, 4, 7, 8]
@@ -105,7 +105,7 @@ export default function makeTrials(debug) {
     trial_type: 'instruct',
     instruct_type: 'faster_practice',
     instruct_text:
-      'Great job! We will do one more practice round. This time, the images will change more quickly. Do your best, and remember to press the space bar whenever you see this image:\n\n[img=noise]\n\n\n ',
+      'Great job! We will do one more practice round.\n\nThis time, the images will [color=yellow]change more quickly[/color]. Try your best to press the [color=yellow]spacebar[/color] whenever you see this image:\n\n[img=noise]\n\n\n ',
   })
   shuffleArray(practice_stim)
   tmp_inds = [12, 13, 15, 16]
@@ -131,7 +131,7 @@ export default function makeTrials(debug) {
     trial_type: 'instruct',
     instruct_type: 'exposure',
     instruct_text:
-      'Excellent, just two sections to go. This next section will be the same as the previous section, except we will show many images (should take about five minutes).',
+      'Excellent, just two sections to go.\n\nThis next section will be the same as the previous section, except we will show many images (should take about five minutes).',
   })
   // generate order of triplets (AA and ABAB disallowed)
   // divide section into thirds, so 8 triplet repeats per third
@@ -201,7 +201,7 @@ export default function makeTrials(debug) {
     trial_type: 'instruct',
     instruct_type: 'test',
     instruct_text:
-      'One more section to go!\n\nIn this section, we will see if one set of images is [color=yellow]more familiar[/color] to you than another set. ',
+      'One more section to go. In this section, we will see if one set of images is [color=yellow]more familiar[/color] to you than another set.\n\nWe will show one set of images on the [color=yellow]left[/color], and another set on the [color=yellow]right[/color]. After seeing both, use the [color=yellow]left[/color] and [color=yellow]right[/color] arrow keys to pick which seemed [color=yellow]more familiar[/color] to you.\n\nDo not be afraid to guess!',
   })
 
   // all combinations of familiar x foil, repeated twice (for 32 total trials)

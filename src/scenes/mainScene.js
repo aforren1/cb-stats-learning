@@ -69,6 +69,17 @@ export default class MainScene extends Phaser.Scene {
       .setOrigin(0.5, 0.5)
     this.start_txt.visible = false
 
+    this.practice_txt = this.add
+      .rexBBCodeText(0, 300, 'Press the [color=yellow]spacebar[/color]\nwhen you see [img=noise]', {
+        fontFamily: 'Verdana',
+        fontStyle: 'bold',
+        fontSize: 40,
+        color: '#dddddd',
+        align: 'center',
+      })
+      .setOrigin(0.5, 0.5)
+      .setVisible(false)
+
     this.fixation = this.add
       .text(0, 0, '+', {
         fontFamily: 'Verdana',
@@ -78,14 +89,63 @@ export default class MainScene extends Phaser.Scene {
       .setOrigin(0.5, 0.5)
       .setVisible(false)
 
-    this.stim = this.add.sprite(0, 0, 'stimuli').setScale(2.5).setVisible(false) // this is 250px then
-    this.noise = this.add.image(0, 0, 'noise').setScale(0.5).setVisible(false)
+    this.stim = this.add.sprite(0, 0, 'stimuli').setVisible(false) // this is 250px then
+    this.noise = this.add.image(0, 0, 'noise').setVisible(false)
 
     this.check = this.add.image(0, 0, 'check').setScale(2).setVisible(false)
     this.x = this.add.image(0, 0, 'x').setScale(2).setVisible(false)
 
     this.divider = this.add.rectangle(0, 0, 4, height * 0.66, 0xffffff).setVisible(false)
 
+    this.test_txt = this.add
+      .rexBBCodeText(0, -320, 'Which side is [color=yellow]more familiar[/color]?', {
+        fontFamily: 'Verdana',
+        fontStyle: 'bold',
+        fontSize: 40,
+        color: '#dddddd',
+        align: 'center',
+      })
+      .setOrigin(0.5, 0.5)
+      .setVisible(false)
+
+    this.larrow = this.add.image(-200, 300, 'arrow').setScale(1.5).setVisible(false)
+    this.rarrow = this.add.image(200, 300, 'arrow').setScale(-1.5, 1.5).setVisible(false)
+
+    this.complete_txt = this.add
+      .text(0, 0, 'COMPLETE', {
+        fontSize: 100,
+        fontFamily: 'Arial',
+        fontStyle: 'italic',
+        fill: false,
+        align: 'center',
+        padding: {
+          left: 8,
+          right: 16,
+          top: 8,
+          bottom: 8,
+        },
+        strokeThickness: 2,
+        shadow: {
+          blur: 10,
+          color: '#00ff00',
+          stroke: true,
+          fill: true,
+        },
+      })
+      .setOrigin(0.5, 0.5)
+      .setVisible(false)
+    this.details = this.add
+      .text(0, 200, 'Will redirect shortly...', {
+        fontFamily: 'Verdana',
+        fontStyle: 'bold',
+        fontSize: 60,
+        color: '#dddddd',
+        stroke: '#444444',
+        strokeThickness: 6,
+        align: 'center',
+      })
+      .setOrigin(0.5, 0.5)
+      .setVisible(false)
     this.space_timestamps = []
     this.input.keyboard.on('keydown-SPACE', (evt) => {
       // capture all space events, and dole out to whatever needs them
@@ -152,6 +212,9 @@ export default class MainScene extends Phaser.Scene {
       case states.EXPOSURE:
         if (this.entering) {
           this.entering = false
+          if (this.current_trial.trial_type === 'practice') {
+            this.practice_txt.visible = true
+          }
           // empty out space queue
           this.space_timestamps = []
           let trial_start_time = window.performance.now()
@@ -195,10 +258,11 @@ export default class MainScene extends Phaser.Scene {
                 feedback_time: current_trial.feedback_time,
                 iti_time: current_trial.iti_time,
                 trial_start_time: trial_start_time,
-                press_times: this.space_timestamps.length > 0 ? this.space_timestamps : null,
+                press_times: this.space_timestamps.length > 0 ? this.space_timestamps.slice() : null,
               })
               this.next_trial()
               this.fixation.visible = false
+              this.practice_txt.visible = false
             })
           })
           // empty out space queue
@@ -208,6 +272,7 @@ export default class MainScene extends Phaser.Scene {
       case states.TEST:
         if (this.entering) {
           this.entering = false
+          this.test_txt.visible = true
           this.divider.visible = true
           let trial_start_time = window.performance.now()
           // show triplet over course of 500ms, then switch sides & show second triplet
@@ -250,6 +315,8 @@ export default class MainScene extends Phaser.Scene {
               })
               console.log(ctx.all_data)
               ctx.start_txt.visible = false
+              ctx.test_txt.visible = false
+              ctx.divider.visible = false
               ctx.next_trial()
             })
           }
@@ -356,17 +423,31 @@ export default class MainScene extends Phaser.Scene {
                   this.stim.visible = false
                   leftkey.enabled = true
                   rightkey.enabled = true
+                  this.larrow.visible = true
+                  this.rarrow.visible = true
+                  this.larrow.setTint(0xffffff)
+                  this.rarrow.setTint(0xffffff)
                   let bounce = true
                   leftkey.once('down', (evt) => {
                     if (bounce) {
                       bounce = false
-                      handleInput(this, 'left', evt.originalEvent.timeStamp)
+                      this.larrow.setTint(0x6666ff)
+                      this.time.delayedCall(200, () => {
+                        this.larrow.visible = false
+                        this.rarrow.visible = false
+                        handleInput(this, 'left', evt.originalEvent.timeStamp)
+                      })
                     }
                   })
                   rightkey.once('down', (evt) => {
                     if (bounce) {
                       bounce = false
-                      handleInput(this, 'right', evt.originalEvent.timeStamp)
+                      this.rarrow.setTint(0x6666ff)
+                      this.time.delayedCall(200, () => {
+                        this.larrow.visible = false
+                        this.rarrow.visible = false
+                        handleInput(this, 'right', evt.originalEvent.timeStamp)
+                      })
                     }
                   })
                 },
@@ -378,6 +459,28 @@ export default class MainScene extends Phaser.Scene {
       case states.END:
         if (this.entering) {
           this.entering = false
+          this.complete_txt.visible = true
+          this.details.visible = true
+          this.scale.stopFullscreen()
+          let data = {
+            config: this.game.user_config,
+            data: this.all_data,
+            mapping: { familiar: this.exp_info.familiar_triplets, foil: this.exp_info.foil_triplets },
+          }
+          let url = 'https://google.com/?cc='
+          if (data.config.is_prolific) {
+            url = 'https://app.prolific.co/submissions/complete?cc='
+          }
+          Promise.all(postData(data)).then((values) => {
+            window.removeEventListener('beforeunload', onBeforeUnload)
+            let delay = 0
+            if (this.is_debug) {
+              delay = 1000
+            }
+            this.time.delayedCall(delay, () => {
+              window.location.href = url + 'AAAA'
+            })
+          })
         }
         break
     }

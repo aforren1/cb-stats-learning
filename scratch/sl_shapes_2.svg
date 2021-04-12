@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -7,20 +9,36 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
    version="1.1"
-   viewBox="0 0 1000.0007 1000"
-   stroke-miterlimit="10"
-   id="svg4123"
-   sodipodi:docname="SL_shapes_equal.svg"
+   id="svg1415"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   inkscape:export-filename="/home/adf/Downloads/SL_shapes.png"
-   inkscape:export-xdpi="96"
-   inkscape:export-ydpi="96"
-   width="264.58334mm"
-   height="264.58334mm"
-   style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10">
+   sodipodi:docname="sl_shapes_2.svg">
+  <defs
+     id="defs1409" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="-137.14286"
+     inkscape:cy="560"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="1639"
+     inkscape:window-height="824"
+     inkscape:window-x="112"
+     inkscape:window-y="80"
+     inkscape:window-maximized="0" />
   <metadata
-     id="metadata4129">
+     id="metadata1412">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -31,51 +49,14 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <defs
-     id="defs4127" />
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1920"
-     inkscape:window-height="1043"
-     id="namedview4125"
-     showgrid="false"
-     inkscape:zoom="0.3535534"
-     inkscape:cx="829.19164"
-     inkscape:cy="-127.08286"
-     inkscape:window-x="1920"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="g4121"
-     inkscape:pagecheckerboard="true"
-     units="mm"
-     borderlayer="false"
-     showborder="true"
-     viewbox-width="5000"
-     inkscape:document-units="px"
-     viewbox-x="0" />
-  <clipPath
-     id="p.0">
-    <path
-       d="M 0,0 H 1348.0157 V 741 H 0 Z"
-       id="path3941"
-       inkscape:connector-curvature="0"
-       style="clip-rule:nonzero" />
-  </clipPath>
   <g
-     clip-path="url(#p.0)"
-     id="g4121"
-     transform="translate(-66.051044,91.136209)">
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4152"
-       transform="matrix(1.5990935,0,0,2.4342718,512.67632,-227.17051)"
+       transform="matrix(0.42309349,0,0,0.64406775,94.635594,-14.649923)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -93,7 +74,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4158"
-       transform="matrix(1.5990935,0,0,2.05008,-191.02806,213.42257)"
+       transform="matrix(0.42309349,0,0,0.542417,-91.552857,101.92366)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -121,7 +102,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4162"
-       transform="matrix(2.1405269,0,0,1.5902831,-1226.9312,49.918341)"
+       transform="matrix(0.56634774,0,0,0.4207624,-365.63557,58.663169)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -139,7 +120,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4189"
-       transform="matrix(1.6225968,0,0,1.5889366,-297.0089,-413.14243)"
+       transform="matrix(0.42931207,0,0,0.42040614,-119.59362,-63.854992)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -157,7 +138,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4194"
-       transform="matrix(4.1207011,0,0,1.5940093,-1731.6353,202.78144)"
+       transform="matrix(1.0902688,0,0,0.42174829,-499.17186,99.108198)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -180,7 +161,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4201"
-       transform="matrix(1.5083136,0,0,1.5083138,-826.20681,19.403446)"
+       transform="matrix(0.39907464,0,0,0.39907469,-259.61057,50.589435)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -213,7 +194,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4220"
-       transform="matrix(1.5990935,0,0,1.9312652,522.60666,-445.25732)"
+       transform="matrix(0.42309349,0,0,0.51098058,97.262994,-72.352062)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -226,7 +207,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4226"
-       transform="matrix(1.5632566,0,0,1.7557002,-368.78636,-347.71855)"
+       transform="matrix(0.41361164,0,0,0.46452901,-138.58474,-46.544925)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -254,7 +235,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4234"
-       transform="matrix(1.5986779,0,0,1.6043983,-280.69455,-283.89688)"
+       transform="matrix(0.42298353,0,0,0.42449705,-115.27711,-29.658775)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -292,7 +273,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4260"
-       transform="matrix(2.125167,0,0,1.5886923,177.48531,-952.17984)"
+       transform="matrix(0.56228377,0,0,0.4203415,5.9496393,-206.4753)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -315,7 +296,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4264"
-       transform="matrix(2.3166732,0,0,1.5768562,-520.67794,-750.45937)"
+       transform="matrix(0.61295312,0,0,0.41720987,-178.77273,-153.10343)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -333,7 +314,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4271"
-       transform="matrix(1.5305816,0,0,2.6492359,-226.16435,-996.68015)"
+       transform="matrix(0.40496638,0,0,0.70094367,-100.84933,-218.24934)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -366,7 +347,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4179"
-       transform="matrix(1.6379983,0,0,1.6204033,-1279.5467,38.394006)"
+       transform="matrix(0.43338705,0,0,0.42873171,-379.55675,55.614021)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -409,7 +390,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4170"
-       transform="matrix(1.6237666,0,0,1.5702888,-982.84964,-171.52627)"
+       transform="matrix(0.42962158,0,0,0.41547224,-301.05567,0.07261562)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -430,7 +411,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4249"
-       transform="matrix(-0.79605186,-0.7960519,1.9396727,-1.9396728,537.59417,2227.9946)"
+       transform="matrix(-0.21062205,-0.21062207,0.51320507,-0.51320509,101.22843,634.94585)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -458,7 +439,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4283"
-       transform="matrix(1.6003021,0,0,1.5902852,-1182.8396,-126.94801)"
+       transform="matrix(0.42341326,0,0,0.42076296,-353.96967,11.867281)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -476,7 +457,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4276"
-       transform="matrix(1.5902968,0,0,1.6553005,-751.59205,-165.02523)"
+       transform="matrix(0.42076603,0,0,0.43796492,-239.86875,1.7926826)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -499,7 +480,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4243"
-       transform="matrix(1.7190706,0,0,1.7190706,-1060.4665,88.629871)"
+       transform="matrix(0.45483743,0,0,0.45483743,-321.59178,68.905595)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -542,7 +523,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4217"
-       transform="matrix(1.8855242,0,0,1.5703661,-1934.8996,195.13964)"
+       transform="matrix(0.49887828,0,0,0.4154927,-552.95221,97.086305)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -565,7 +546,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4255"
-       transform="matrix(1.4229599,0,0,1.4229774,-1570.7802,201.78405)"
+       transform="matrix(0.37649147,0,0,0.3764961,-456.61228,98.844305)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -593,7 +574,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4207"
-       transform="matrix(1.6290791,0,0,1.6929561,-601.67398,-260.91697)"
+       transform="matrix(0.43102718,0,0,0.44792797,-200.20293,-23.578673)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -621,7 +602,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4212"
-       transform="matrix(1.5897789,0,0,1.6319459,-667.59154,-228.7529)"
+       transform="matrix(0.420629,0,0,0.43178569,-217.64362,-15.068597)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -644,7 +625,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4185"
-       transform="matrix(1.5752745,0,0,1.7283616,-1347.7826,-175.86896)"
+       transform="matrix(0.41679138,0,0,0.45729567,-397.61084,-1.0763874)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -672,7 +653,7 @@
     <g
        style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
        id="g4279"
-       transform="matrix(1.7283034,0,0,2.0248319,-808.65237,-568.28712)"
+       transform="matrix(0.45728027,0,0,0.53573677,-254.96596,-104.90369)"
        inkscape:export-filename="/home/adf/Downloads/stim/ss.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
