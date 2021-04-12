@@ -92,6 +92,9 @@ export default function makeTrials(debug) {
       trial_number: trial_counter++,
     })
   }
+  if (debug) {
+    trial_list.splice(-7, 7)
+  }
   // practice 2 (harder, no feedback)
   trial_list.push({
     trial_type: 'instruct',
@@ -112,6 +115,9 @@ export default function makeTrials(debug) {
       triplet_id: null,
       trial_number: trial_counter++,
     })
+  }
+  if (debug) {
+    trial_list.splice(-7, 7)
   }
   // exposure
   trial_list.push({
@@ -178,7 +184,9 @@ export default function makeTrials(debug) {
       })
     }
   }
-
+  if (debug) {
+    trial_list.splice(-280, 280)
+  }
   // test phase
   trial_list.push({
     trial_type: 'instruct',
@@ -189,10 +197,8 @@ export default function makeTrials(debug) {
   let combos_1 = []
   let combos_2 = []
   let tmp = 0
-  let first_side_1 = Array(8).fill(['left', 'right']).flat()
-  let first_side_2 = Array(8).fill(['left', 'right']).flat()
-  shuffleArray(first_side_1)
-  shuffleArray(first_side_2)
+  let first_side_1 = Array(4).fill(['left', 'left', 'right', 'right']).flat()
+  let first_side_2 = Array(4).fill(['right', 'right', 'left', 'left']).flat()
 
   for (let fam of familiar_triplets) {
     for (let foil of foil_triplets) {
@@ -201,12 +207,14 @@ export default function makeTrials(debug) {
         foo = ['right', 'left']
       }
       combos_1.push({
+        trial_type: 'test',
         familiar_triplet: fam,
         foil_triplet: foil,
         familiar_side: foo[0],
         first_side: first_side_1[tmp],
       })
       combos_2.push({
+        trial_type: 'test',
         familiar_triplet: fam,
         foil_triplet: foil,
         familiar_side: foo[1],
@@ -217,5 +225,23 @@ export default function makeTrials(debug) {
     }
   }
 
-  // shuffle first section (no specific restrictions on order AFAIK?)
+  // shuffle sections (no specific restrictions on order AFAIK?)
+  shuffleArray(combos_1)
+  shuffleArray(combos_2)
+
+  // plug into trial list
+  for (let t of combos_1) {
+    trial_list.push(t)
+  }
+  for (let t of combos_2) {
+    trial_list.push(t)
+  }
+  if (debug) {
+    trial_list.splice(-28, 28)
+  }
+  return {
+    trials: trial_list,
+    familiar_triplets: familiar_triplets,
+    foil_triplets: foil_triplets,
+  }
 }
