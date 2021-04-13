@@ -21,7 +21,7 @@ export default class TitleScene extends Phaser.Scene {
     let user_config = this.game.user_config
 
     let start_txt = this.add
-      .text(center, center, 'Click the left mouse\nbutton to start.', {
+      .rexBBCodeText(center, center, '[b]Press the [color=yellow]spacebar[/color]\nto start.[/b]', {
         fontFamily: 'Verdana',
         fontStyle: 'bold',
         fontSize: 60,
@@ -43,7 +43,7 @@ export default class TitleScene extends Phaser.Scene {
 
     // we do a pointer event so that it counts as a page interaction (& fullscreen
     // is allowed to kick in)
-    this.input.once('pointerdown', (ptr) => {
+    this.input.keyboard.once('keydown-SPACE', (evt) => {
       // https://supernapie.com/blog/hiding-the-mouse-in-a-ux-friendly-way/
       // we don't need the cursor, but we also don't need pointer lock or the like
       let canvas = this.sys.canvas

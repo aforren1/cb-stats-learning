@@ -13,7 +13,7 @@ For practice/exposure:
     trial_type (instruct, practice, exposure, test)
     stimulus_index (stimulus shown, 0-23)
     stimulus_id (A, B, C, ...)
-    cover_pos (x, y or null) (if null, no cover shown)
+    cover_vis (true or false)
     exposure_time (millis)
     feedback_time (millis or null) (if null, no feedback)
     iti_time (millis)
@@ -40,7 +40,7 @@ For test:
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
-    ;[array[i], array[j]] = [array[j], array[i]]
+      ;[array[i], array[j]] = [array[j], array[i]]
   }
 }
 
@@ -84,12 +84,11 @@ export default function makeTrials(debug) {
   shuffleArray(practice_stim)
   let tmp_inds = [1, 4, 7, 8]
   for (let i of practice_stim) {
-    let pos = tmp_inds.includes(trial_counter) ? randCoord() : null
     trial_list.push({
       trial_type: 'practice',
       stimulus_index: stim_ids.indexOf(i),
       stimulus_id: i,
-      cover_pos: pos,
+      cover_vis: tmp_inds.includes(trial_counter),
       exposure_time: 1500,
       feedback_time: 500,
       iti_time: 1000,
@@ -110,12 +109,11 @@ export default function makeTrials(debug) {
   shuffleArray(practice_stim)
   tmp_inds = [12, 13, 15, 16]
   for (let i of practice_stim) {
-    let pos = tmp_inds.includes(trial_counter) ? randCoord() : null
     trial_list.push({
       trial_type: 'practice',
       stimulus_index: stim_ids.indexOf(i),
       stimulus_id: i,
-      cover_pos: pos,
+      cover_vis: tmp_inds.includes(trial_counter),
       exposure_time: 500,
       feedback_time: null,
       iti_time: 500,
@@ -179,12 +177,11 @@ export default function makeTrials(debug) {
     // loop within triplet
     let tmp_triplet = familiar_triplets[triplet_idx]
     for (let stim_idx of tmp_triplet) {
-      let pos = cover_arr[cover_counter++] ? randCoord() : null
       trial_list.push({
         trial_type: 'exposure',
         stimulus_index: stim_ids.indexOf(stim_idx),
         stimulus_id: stim_idx,
-        cover_pos: pos,
+        cover_vis: cover_arr[cover_counter++],
         exposure_time: 500,
         feedback_time: null,
         iti_time: 500,

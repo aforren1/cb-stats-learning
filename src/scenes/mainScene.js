@@ -90,7 +90,7 @@ export default class MainScene extends Phaser.Scene {
       .setVisible(false)
 
     this.stim = this.add.sprite(0, 0, 'stimuli').setVisible(false) // this is 250px then
-    this.noise = this.add.image(0, 0, 'noise').setVisible(false)
+    this.noise = this.add.image(0, 0, 'noise').setScale(0.75).setVisible(false)
 
     this.check = this.add.image(0, 0, 'check').setScale(2).setVisible(false)
     this.x = this.add.image(0, 0, 'x').setScale(2).setVisible(false)
@@ -98,10 +98,10 @@ export default class MainScene extends Phaser.Scene {
     this.divider = this.add.rectangle(0, 0, 4, height * 0.66, 0xffffff).setVisible(false)
 
     this.test_txt = this.add
-      .rexBBCodeText(0, -320, 'Which sequence of images is [color=yellow]more familiar[/color]?', {
+      .rexBBCodeText(0, -320, 'Which sequence of images is\n[color=yellow]more familiar[/color]?', {
         fontFamily: 'Verdana',
         fontStyle: 'bold',
-        fontSize: 40,
+        fontSize: 36,
         color: '#dddddd',
         align: 'center',
       })
@@ -173,7 +173,7 @@ export default class MainScene extends Phaser.Scene {
             this.start_txt.visible = true
             let flash = this.tweens.add({
               targets: this.start_txt,
-              alpha: { from: 0.3, to: 1 },
+              alpha: { from: 1, to: 0.3 },
               ease: 'Linear',
               duration: 2000,
               repeat: -1,
@@ -201,8 +201,8 @@ export default class MainScene extends Phaser.Scene {
               this.time.delayedCall(2000, () => {
                 this.instructions.visible = false
                 this.start_txt.visible = false
-                this.instructions.alpha = 1
                 this.start_txt.alpha = 1
+                this.instructions.alpha = 1
                 this.next_trial()
               })
             })
@@ -221,9 +221,7 @@ export default class MainScene extends Phaser.Scene {
           // set the frame
           this.stim.setVisible(true).setFrame(current_trial.stimulus_index)
           // show the cover?
-          if (current_trial.cover_pos) {
-            this.noise.setVisible(true).setPosition(current_trial.cover_pos.x, current_trial.cover_pos.y)
-          }
+          this.noise.setVisible(current_trial.cover_vis)
 
           this.time.delayedCall(current_trial.exposure_time, () => {
             // turn off noise & stim
@@ -232,10 +230,10 @@ export default class MainScene extends Phaser.Scene {
             // (optional) show feedback
             if (current_trial.feedback_time) {
               let feedback_stim = this.x
-              if (current_trial.cover_pos && this.space_timestamps.length > 0) {
+              if (current_trial.cover_vis && this.space_timestamps.length > 0) {
                 // good
                 feedback_stim = this.check
-              } else if (!current_trial.cover_pos && this.space_timestamps.length === 0) {
+              } else if (!current_trial.cover_vis && this.space_timestamps.length === 0) {
                 // good
                 feedback_stim = this.check
               }
@@ -253,7 +251,7 @@ export default class MainScene extends Phaser.Scene {
                 trial_type: current_trial.trial_type,
                 stimulus_index: current_trial.stimulus_index,
                 stimulus_id: current_trial.stimulus_id,
-                cover_pos: current_trial.cover_pos,
+                cover_vis: current_trial.cover_vis,
                 exposure_time: current_trial.exposure_time,
                 feedback_time: current_trial.feedback_time,
                 iti_time: current_trial.iti_time,
