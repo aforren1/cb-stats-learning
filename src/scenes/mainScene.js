@@ -98,7 +98,7 @@ export default class MainScene extends Phaser.Scene {
     this.divider = this.add.rectangle(0, 0, 4, height * 0.66, 0xffffff).setVisible(false)
 
     this.test_txt = this.add
-      .rexBBCodeText(0, -320, 'Which sequence of images is\n[color=yellow]more familiar[/color]?', {
+      .rexBBCodeText(0, -320, 'Which sequence of images is\n[color=yellow]more familiar[/color], [color=#9FC0DE]left[/color] or [color=#F2C894]right[/color]?', {
         fontFamily: 'Verdana',
         fontStyle: 'bold',
         fontSize: 36,
@@ -108,8 +108,17 @@ export default class MainScene extends Phaser.Scene {
       .setOrigin(0.5, 0.5)
       .setVisible(false)
 
-    this.larrow = this.add.image(-200, 300, 'arrow').setScale(1.5).setVisible(false)
-    this.rarrow = this.add.image(200, 300, 'arrow').setScale(-1.5, 1.5).setVisible(false)
+    this.larrow = this.add.image(-200, 250, 'arrow').setScale(1.5).setVisible(false)
+    this.rarrow = this.add.image(200, 250, 'arrow').setScale(-1.5, 1.5).setVisible(false)
+    this.arrow_txt = this.add.rexBBCodeText(0, 320, 'Use the [color=#9FC0DE]left[/color] or [color=#F2C894]right[/color] arrows to pick.', {
+      fontFamily: 'Verdana',
+      fontStyle: 'bold',
+      fontSize: 30,
+      color: '#dddddd',
+      align: 'center',
+    })
+      .setOrigin(0.5, 0.5)
+      .setVisible(false)
 
     this.complete_txt = this.add
       .text(0, 0, 'COMPLETE', {
@@ -423,16 +432,18 @@ export default class MainScene extends Phaser.Scene {
                   rightkey.enabled = true
                   this.larrow.visible = true
                   this.rarrow.visible = true
+                  this.arrow_txt.visible = true
                   this.larrow.setTint(0xffffff)
                   this.rarrow.setTint(0xffffff)
                   let bounce = true
                   leftkey.once('down', (evt) => {
                     if (bounce) {
                       bounce = false
-                      this.larrow.setTint(0x6666ff)
+                      this.larrow.setTint(0x555555)
                       this.time.delayedCall(200, () => {
                         this.larrow.visible = false
                         this.rarrow.visible = false
+                        this.arrow_txt.visible = false
                         handleInput(this, 'left', evt.originalEvent.timeStamp)
                       })
                     }
@@ -440,10 +451,11 @@ export default class MainScene extends Phaser.Scene {
                   rightkey.once('down', (evt) => {
                     if (bounce) {
                       bounce = false
-                      this.rarrow.setTint(0x6666ff)
+                      this.rarrow.setTint(0x555555)
                       this.time.delayedCall(200, () => {
                         this.larrow.visible = false
                         this.rarrow.visible = false
+                        this.arrow_txt.visible = false
                         handleInput(this, 'right', evt.originalEvent.timeStamp)
                       })
                     }

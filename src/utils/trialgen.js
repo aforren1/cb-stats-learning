@@ -198,7 +198,7 @@ export default function makeTrials(debug) {
     trial_type: 'instruct',
     instruct_type: 'test',
     instruct_text:
-      'One more section to go. In this section, we will see if one set of images is [color=yellow]more familiar[/color] to you than another set.\n\nWe will show one set of images on the [color=yellow]left[/color], and another set on the [color=yellow]right[/color]. After seeing both, use the [color=yellow]left[/color] and [color=yellow]right[/color] arrow keys to pick which seemed [color=yellow]more familiar[/color] to you.\n\nDo not be afraid to guess!',
+      'This last section will be different.\n\nWe will show you two sequences of images, one on the [color=#9FC0DE]left[/color] side and one on the [color=#F2C894]right[/color].\n\nIf you think the sequence of images shown on the [color=#9FC0DE]left[/color] are more [color=yellow]familiar[/color], click the [color=#9FC0DE]left arrow[/color] key. If you think the sequence of images on the [color=#F2C894]right[/color] are more [color=yellow]familiar[/color], click the [color=#F2C894]right arrow[/color].\n\nDo not be afraid to guess!',
   })
 
   // all combinations of familiar x foil, repeated twice (for 32 total trials)
@@ -216,6 +216,7 @@ export default function makeTrials(debug) {
       }
       combos_1.push({
         trial_type: 'test',
+        attn: false,
         familiar_triplet: fam,
         familiar_indices: fam.map((e) => {
           return stim_ids.indexOf(e)
@@ -229,6 +230,7 @@ export default function makeTrials(debug) {
       })
       combos_2.push({
         trial_type: 'test',
+        attn: false,
         familiar_triplet: fam,
         familiar_indices: fam.map((e) => {
           return stim_ids.indexOf(e)
@@ -251,11 +253,46 @@ export default function makeTrials(debug) {
 
   // plug into trial list
   for (let t of combos_1) {
+    t.trial_number = trial_counter++
     trial_list.push(t)
   }
+  // insert foil vs novel test (one halfway, one end)
+  trial_list.push({
+    trial_type: 'test',
+    attn: true,
+    familiar_triplet: foil_triplets[0],
+    familiar_indices: foil_triplets[0].map(e => {
+      return stim_ids.indexOf(e)
+    }),
+    foil_triplet: practice_stim.slice(0, 3),
+    foil_indices: practice_stim.slice(0, 3).map(e => {
+      return stim_ids.indexOf(e)
+    }),
+    familiar_side: 'left',
+    first_side: 'left',
+    trial_number: trial_counter++,
+  })
   for (let t of combos_2) {
+    t.trial_number = trial_counter++
     trial_list.push(t)
   }
+  // insert the second foil vs novel
+  trial_list.push({
+    trial_type: 'test',
+    attn: true,
+    familiar_triplet: foil_triplets[1],
+    familiar_indices: foil_triplets[1].map(e => {
+      return stim_ids.indexOf(e)
+    }),
+    foil_triplet: practice_stim.slice(3, 6),
+    foil_indices: practice_stim.slice(3, 6).map(e => {
+      return stim_ids.indexOf(e)
+    }),
+    familiar_side: 'right',
+    first_side: 'right',
+    trial_number: trial_counter++,
+  })
+
   if (debug) {
     trial_list.splice(-28, 28)
   }
