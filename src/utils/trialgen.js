@@ -79,7 +79,7 @@ export default function makeTrials(debug) {
     trial_type: 'instruct',
     instruct_type: 'initial_practice',
     instruct_text:
-      'In this study, you will see a sequence of images. Whenever you see\n\n[img=noise]\n\n\non top, press the [color=yellow]spacebar[/color].',
+      'In this study, you will see a sequence of images. Whenever you see\n\n[img=noise]\n\n\non top of the image, press the [color=yellow]spacebar[/color].',
   })
   shuffleArray(practice_stim)
   let tmp_inds = [1, 4, 7, 8]
