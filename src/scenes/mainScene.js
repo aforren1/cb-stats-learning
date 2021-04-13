@@ -110,7 +110,7 @@ export default class MainScene extends Phaser.Scene {
 
     this.larrow = this.add.image(-200, 250, 'arrow').setScale(1.5).setVisible(false)
     this.rarrow = this.add.image(200, 250, 'arrow').setScale(-1.5, 1.5).setVisible(false)
-    this.arrow_txt = this.add.rexBBCodeText(0, 320, 'Use the [color=#9FC0DE]left[/color] or [color=#F2C894]right[/color] arrows to pick.', {
+    this.arrow_txt = this.add.rexBBCodeText(0, 320, 'Use the [color=#9FC0DE]left[/color] or [color=#F2C894]right[/color] arrow keys to pick.', {
       fontFamily: 'Verdana',
       fontStyle: 'bold',
       fontSize: 30,
