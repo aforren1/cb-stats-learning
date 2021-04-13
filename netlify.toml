@@ -18,6 +18,3 @@
 
 [build.environment]
   TZ='America/New_York'
-
-[functions]
-  node_bundler = "esbuild"
