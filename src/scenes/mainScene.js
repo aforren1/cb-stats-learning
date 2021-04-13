@@ -98,7 +98,7 @@ export default class MainScene extends Phaser.Scene {
     this.divider = this.add.rectangle(0, 0, 4, height * 0.66, 0xffffff).setVisible(false)
 
     this.test_txt = this.add
-      .rexBBCodeText(0, -320, 'Which side is [color=yellow]more familiar[/color]?', {
+      .rexBBCodeText(0, -320, 'Which sequence of images is [color=yellow]more familiar[/color]?', {
         fontFamily: 'Verdana',
         fontStyle: 'bold',
         fontSize: 40,
