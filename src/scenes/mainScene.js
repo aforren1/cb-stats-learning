@@ -27,7 +27,7 @@ export default class MainScene extends Phaser.Scene {
 
   preload() {
     this.exp_info = makeTrials(this.game.user_config.debug)
-    console.log(this.exp_info)
+    //console.log(this.exp_info)
   }
 
   create() {
@@ -98,25 +98,36 @@ export default class MainScene extends Phaser.Scene {
     this.divider = this.add.rectangle(0, 0, 4, height * 0.66, 0xffffff).setVisible(false)
 
     this.test_txt = this.add
-      .rexBBCodeText(0, -320, 'Which sequence of images is\n[color=yellow]more familiar[/color], [color=#9FC0DE]left[/color] or [color=#F2C894]right[/color]?', {
-        fontFamily: 'Verdana',
-        fontStyle: 'bold',
-        fontSize: 36,
-        color: '#dddddd',
-        align: 'center',
-      })
+      .rexBBCodeText(
+        0,
+        -320,
+        'Which sequence of images is\n[color=yellow]more familiar[/color], [color=#9FC0DE]left[/color] or [color=#F2C894]right[/color]?',
+        {
+          fontFamily: 'Verdana',
+          fontStyle: 'bold',
+          fontSize: 36,
+          color: '#dddddd',
+          align: 'center',
+        }
+      )
       .setOrigin(0.5, 0.5)
       .setVisible(false)
 
     this.larrow = this.add.image(-200, 250, 'arrow').setScale(1.5).setVisible(false)
     this.rarrow = this.add.image(200, 250, 'arrow').setScale(-1.5, 1.5).setVisible(false)
-    this.arrow_txt = this.add.rexBBCodeText(0, 320, 'Use the [color=#9FC0DE]left[/color] or [color=#F2C894]right[/color] arrow keys to pick.', {
-      fontFamily: 'Verdana',
-      fontStyle: 'bold',
-      fontSize: 30,
-      color: '#dddddd',
-      align: 'center',
-    })
+    this.arrow_txt = this.add
+      .rexBBCodeText(
+        0,
+        320,
+        'Use the [color=#9FC0DE]left[/color] or [color=#F2C894]right[/color] arrow keys to pick.',
+        {
+          fontFamily: 'Verdana',
+          fontStyle: 'bold',
+          fontSize: 30,
+          color: '#dddddd',
+          align: 'center',
+        }
+      )
       .setOrigin(0.5, 0.5)
       .setVisible(false)
 
@@ -195,7 +206,7 @@ export default class MainScene extends Phaser.Scene {
                 trial_start_time: trial_start_time,
                 response_time: evt.timeStamp,
               })
-              console.log(this.all_data)
+              //console.log(this.all_data)
               flash.stop()
 
               this.tweens.add(
@@ -320,7 +331,7 @@ export default class MainScene extends Phaser.Scene {
                 continue_time: evt.timeStamp,
                 choice: resp,
               })
-              console.log(ctx.all_data)
+              //console.log(ctx.all_data)
               ctx.start_txt.visible = false
               ctx.test_txt.visible = false
               ctx.divider.visible = false
