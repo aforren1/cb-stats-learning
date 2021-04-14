@@ -62,7 +62,7 @@ window.addEventListener('load', () => {
 
   let ua_res = new UAParser().getResult()
   let user_config = {
-    id: id,
+    id: id.slice(0, 8),
     is_prolific: url_params.get('PROLIFIC_PID') !== null,
     group: group,
     exp_type: exp_type,
