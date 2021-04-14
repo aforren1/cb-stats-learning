@@ -499,7 +499,7 @@ export default class MainScene extends Phaser.Scene {
               delay = 1000
             }
             this.time.delayedCall(delay, () => {
-              window.location.href = url + 'AAAA'
+              window.location.href = url + '10A2899D'
             })
           })
         }
