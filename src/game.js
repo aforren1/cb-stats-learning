@@ -52,7 +52,7 @@ window.addEventListener('load', () => {
   const url_params = new URL(window.location.href).searchParams
   // If coming from prolific, use that ID. Otherwise, generate some random chars
   const randomString = (length) => [...Array(length)].map(() => (~~(Math.random() * 36)).toString(36)).join('')
-  let id = url_params.get('id') || localStorage.getItem('id') || randomString(8)
+  let id = url_params.get('PROLIFIC_PID') || url_params.get('id') || localStorage.getItem('id') || randomString(8)
   localStorage.setItem('id', id)
 
   // for now, just exploring adaptive vs non
@@ -63,6 +63,7 @@ window.addEventListener('load', () => {
   let ua_res = new UAParser().getResult()
   let user_config = {
     id: id,
+    is_prolific: url_params.get('PROLIFIC_PID') !== null,
     group: group,
     exp_type: exp_type,
     datetime: new Date(),
