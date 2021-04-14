@@ -277,6 +277,7 @@ export default class MainScene extends Phaser.Scene {
                 iti_time: current_trial.iti_time,
                 trial_start_time: trial_start_time,
                 press_times: this.space_timestamps.length > 0 ? this.space_timestamps.slice() : null,
+                trial_number: current_trial.trial_number,
               })
               this.next_trial()
               this.fixation.visible = false
@@ -320,6 +321,7 @@ export default class MainScene extends Phaser.Scene {
             ctx.input.keyboard.once('keydown-SPACE', (evt) => {
               ctx.all_data.test.push({
                 trial_type: current_trial.trial_type,
+                attn: current_trial.attn,
                 familiar_triplet: current_trial.familiar_triplet,
                 familiar_indices: current_trial.familiar_indices,
                 foil_triplet: current_trial.foil_triplet,
@@ -330,6 +332,7 @@ export default class MainScene extends Phaser.Scene {
                 response_time: time,
                 continue_time: evt.timeStamp,
                 choice: resp,
+                trial_number: current_trial.trial_number,
               })
               //console.log(ctx.all_data)
               ctx.start_txt.visible = false
