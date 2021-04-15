@@ -27,7 +27,7 @@ export default class MainScene extends Phaser.Scene {
 
   preload() {
     this.exp_info = makeTrials(this.game.user_config.debug)
-    //console.log(this.exp_info)
+    console.log(this.exp_info)
   }
 
   create() {
@@ -294,14 +294,14 @@ export default class MainScene extends Phaser.Scene {
           this.test_txt.visible = true
           this.divider.visible = true
           let trial_start_time = window.performance.now()
-          // show triplet over course of 500ms, then switch sides & show second triplet
+          // show pair over course of 500ms, then switch sides & show second pair
           let poses = { left: -200, right: 200 }
           // pull out sets of indices
-          let first_triplet =
+          let first_pair =
             current_trial.first_side === current_trial.familiar_side
               ? current_trial.familiar_indices
               : current_trial.foil_indices
-          let second_triplet =
+          let second_pair =
             current_trial.first_side !== current_trial.familiar_side
               ? current_trial.familiar_indices
               : current_trial.foil_indices
@@ -322,9 +322,9 @@ export default class MainScene extends Phaser.Scene {
               ctx.all_data.test.push({
                 trial_type: current_trial.trial_type,
                 attn: current_trial.attn,
-                familiar_triplet: current_trial.familiar_triplet,
+                familiar_pair: current_trial.familiar_pair,
                 familiar_indices: current_trial.familiar_indices,
-                foil_triplet: current_trial.foil_triplet,
+                foil_pair: current_trial.foil_pair,
                 foil_indices: current_trial.foil_indices,
                 familiar_side: current_trial.familiar_side,
                 first_side: current_trial.first_side,
@@ -354,7 +354,7 @@ export default class MainScene extends Phaser.Scene {
                 onComplete: () => {
                   this.fixation.visible = false
                   this.stim.visible = true
-                  this.stim.setFrame(first_triplet[0])
+                  this.stim.setFrame(first_pair[0])
                 },
               },
               {
@@ -369,22 +369,7 @@ export default class MainScene extends Phaser.Scene {
                 duration: 500,
                 onComplete: () => {
                   this.stim.visible = true
-                  this.stim.setFrame(first_triplet[1])
-                },
-              },
-              {
-                alpha: 1,
-                duration: 500,
-                onComplete: () => {
-                  this.stim.visible = false
-                },
-              },
-              {
-                alpha: 1,
-                duration: 500,
-                onComplete: () => {
-                  this.stim.visible = true
-                  this.stim.setFrame(first_triplet[2])
+                  this.stim.setFrame(first_pair[1])
                 },
               },
               {
@@ -404,7 +389,7 @@ export default class MainScene extends Phaser.Scene {
                 onComplete: () => {
                   this.fixation.visible = false
                   this.stim.visible = true
-                  this.stim.setFrame(second_triplet[0])
+                  this.stim.setFrame(second_pair[0])
                 },
               },
               {
@@ -419,22 +404,7 @@ export default class MainScene extends Phaser.Scene {
                 duration: 500,
                 onComplete: () => {
                   this.stim.visible = true
-                  this.stim.setFrame(second_triplet[1])
-                },
-              },
-              {
-                alpha: 1,
-                duration: 500,
-                onComplete: () => {
-                  this.stim.visible = false
-                },
-              },
-              {
-                alpha: 1,
-                duration: 500,
-                onComplete: () => {
-                  this.stim.visible = true
-                  this.stim.setFrame(second_triplet[2])
+                  this.stim.setFrame(second_pair[1])
                 },
               },
               {
@@ -489,7 +459,7 @@ export default class MainScene extends Phaser.Scene {
           let data = {
             config: this.game.user_config,
             data: this.all_data,
-            mapping: { familiar: this.exp_info.familiar_triplets, foil: this.exp_info.foil_triplets },
+            mapping: { familiar: this.exp_info.familiar_pairs, foil: this.exp_info.foil_pairs },
           }
           let url = 'https://google.com/?cc='
           if (data.config.is_prolific) {

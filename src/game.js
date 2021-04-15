@@ -76,7 +76,7 @@ window.addEventListener('load', () => {
     },
     fullscreen_supported: document.fullscreenEnabled, // this is pretty important for us?
     debug: url_params.get('debug') !== null,
-    version: 1,
+    version: 2,
   }
   game.user_config = user_config // patch in to pass into game
   // set up for user

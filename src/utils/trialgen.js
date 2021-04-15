@@ -17,7 +17,7 @@ For practice/exposure:
     exposure_time (millis)
     feedback_time (millis or null) (if null, no feedback)
     iti_time (millis)
-    triplet_id (e.g. ABC, DEG) ()
+    pair_id (e.g. AB, DE) ()
     // user data
     trial_start_time
     reaction_time(s) (list of millis or null if no resp)
@@ -27,46 +27,38 @@ For practice/exposure:
 For test:
 {
     trial_type
-    familiar_triplet (e.g. ABC)
-    foil_triplet (e.g. LMN)
+    familiar_pair (e.g. AB)
+    foil_pair (e.g. LM)
     first_side_shown (left/right)
     familiar_side (left/right) (foil on opposite side)
     // user data
     chosen_side (left/right)
-    reaction_time (from end of animating the second triplet)
+    reaction_time (from end of animating the second pair)
 }
 */
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
-      ;[array[i], array[j]] = [array[j], array[i]]
+    ;[array[i], array[j]] = [array[j], array[i]]
   }
 }
 
-function randCoord() {
-  // TODO: adjust during debug
-  return { x: Math.round(Math.random() * 200 - 100), y: Math.round(Math.random() * 200 - 100) }
-}
 const stim_ids = 'ABCDEFGHIJKLMNOPQRSTUVWX'
 export default function makeTrials(debug) {
-  // first, generate the triplets of interest
+  // first, generate the pairs of interest
   let stim_id_list = stim_ids.split('')
   shuffleArray(stim_id_list)
-  // take 3 at a time
-  let familiar_triplets = []
-  for (let i = 0; i < 12; i += 3) {
-    familiar_triplets.push(stim_id_list.slice(i, i + 3))
+  // take 2 at a time
+  let familiar_pairs = []
+  for (let i = 0; i < 6; i += 2) {
+    familiar_pairs.push(stim_id_list.slice(i, i + 2))
   }
-  // now generate foils (3 unique items from 3 different triplets,
+  // now generate foils (2 unique items from 2 different pairs,
   // elements never appearing consecutively)
-  let foil_triplets = []
-  for (let i = 0; i < 4; i++) {
-    foil_triplets.push([
-      familiar_triplets[i % 4][0],
-      familiar_triplets[(i + 1) % 4][1],
-      familiar_triplets[(i + 2) % 4][2],
-    ])
+  let foil_pairs = []
+  for (let i = 0; i < 3; i++) {
+    foil_pairs.push([familiar_pairs[i % 3][0], familiar_pairs[(i + 1) % 3][1]])
   }
 
   // for practice stim, use each one twice
@@ -92,7 +84,7 @@ export default function makeTrials(debug) {
       exposure_time: 1500,
       feedback_time: 500,
       iti_time: 1000,
-      triplet_id: null,
+      pair_id: null,
       trial_number: trial_counter++,
     })
   }
@@ -117,7 +109,7 @@ export default function makeTrials(debug) {
       exposure_time: 500,
       feedback_time: null,
       iti_time: 500,
-      triplet_id: null,
+      pair_id: null,
       trial_number: trial_counter++,
     })
   }
@@ -131,52 +123,24 @@ export default function makeTrials(debug) {
     instruct_text:
       'Excellent, just two sections to go.\n\nThis next section will be the same as the previous section, except we will show many images (should take about five minutes).',
   })
-  // generate order of triplets (AA and ABAB disallowed)
-  // divide section into thirds, so 8 triplet repeats per third
-  // respect repeats across thirds boundaries
-  let base = Array(8).fill([0, 1, 2, 3]).flat()
-  let triplet_sequence = []
-  for (let i = 0; i < 3; i++) {
-    loop2: while (true) {
-      shuffleArray(base)
-      // check constraints
-      // check thirds violations
-      let len = triplet_sequence.length
-      if (base[0] === triplet_sequence[len - 1]) {
-        continue loop2
-      }
-      if (base[1] === triplet_sequence[len - 1] && base[0] === triplet_sequence[len - 2]) {
-        continue loop2
-      }
-      for (let idx = 1; idx < base.length; idx++) {
-        // AA not allowed
-        if (base[idx] === base[idx - 1]) {
-          continue loop2
-        }
-        // ABAB not allowed
-        if (idx > 2 && base[idx] === base[idx - 2] && base[idx - 1] === base[idx - 3]) {
-          continue loop2
-        }
-      }
-      break loop2
-    }
-    // make a copy so we can reuse base
-    triplet_sequence = triplet_sequence.concat(base)
-  }
-  // sequence of triplets should be good to go now
+  // generate order of pairs
+  // no restrictions on order
+  let pair_sequence = Array(48).fill([0, 1, 2]).flat()
+  shuffleArray(pair_sequence)
+  // sequence of pairs should be good to go now
   // expand to trials
-  let num_cover = Math.ceil(3 * triplet_sequence.length * 0.2)
-  let num_not = 3 * triplet_sequence.length - num_cover
+  let num_cover = Math.ceil(2 * pair_sequence.length * 0.2)
+  let num_not = 2 * pair_sequence.length - num_cover
   let cover_true = Array(num_cover).fill(true)
   let cover_false = Array(num_not).fill(false)
   let cover_arr = cover_true.concat(cover_false)
   let cover_counter = 0
   shuffleArray(cover_arr)
-  // loop over sequence of triplets
-  for (let triplet_idx of triplet_sequence) {
-    // loop within triplet
-    let tmp_triplet = familiar_triplets[triplet_idx]
-    for (let stim_idx of tmp_triplet) {
+  // loop over sequence of pairs
+  for (let pair_idx of pair_sequence) {
+    // loop within pair
+    let tmp_pair = familiar_pairs[pair_idx]
+    for (let stim_idx of tmp_pair) {
       trial_list.push({
         trial_type: 'exposure',
         stimulus_index: stim_ids.indexOf(stim_idx),
@@ -185,7 +149,7 @@ export default function makeTrials(debug) {
         exposure_time: 500,
         feedback_time: null,
         iti_time: 500,
-        triplet_id: tmp_triplet.join(''),
+        pair_id: tmp_pair.join(''),
         trial_number: trial_counter++,
       })
     }
@@ -205,42 +169,40 @@ export default function makeTrials(debug) {
   let combos_1 = []
   let combos_2 = []
   let tmp = 0
-  let first_side_1 = Array(4).fill(['left', 'left', 'right', 'right']).flat()
-  let first_side_2 = Array(4).fill(['right', 'right', 'left', 'left']).flat()
+  let first_side_1 = Array(3).fill(['left', 'right', 'left']).flat()
+  let first_side_2 = Array(3).fill(['right', 'left', 'right']).flat()
+  let foo = ['left', 'left', 'right', 'right', 'left', 'left', 'right', 'right', 'left']
+  let bar = ['right', 'right', 'left', 'left', 'right', 'right', 'left', 'left', 'right']
 
-  for (let fam of familiar_triplets) {
-    for (let foil of foil_triplets) {
-      let foo = ['left', 'right']
-      if (tmp % 2 === 1) {
-        foo = ['right', 'left']
-      }
+  for (let fam of familiar_pairs) {
+    for (let foil of foil_pairs) {
       combos_1.push({
         trial_type: 'test',
         attn: false,
-        familiar_triplet: fam,
+        familiar_pair: fam.join(''),
         familiar_indices: fam.map((e) => {
           return stim_ids.indexOf(e)
         }),
-        foil_triplet: foil,
+        foil_pair: foil.join(''),
         foil_indices: foil.map((e) => {
           return stim_ids.indexOf(e)
         }),
-        familiar_side: foo[0],
-        first_side: first_side_1[tmp],
+        familiar_side: first_side_1[tmp],
+        first_side: foo[tmp],
       })
       combos_2.push({
         trial_type: 'test',
         attn: false,
-        familiar_triplet: fam,
+        familiar_pair: fam.join(''),
         familiar_indices: fam.map((e) => {
           return stim_ids.indexOf(e)
         }),
-        foil_triplet: foil,
+        foil_pair: foil.join(''),
         foil_indices: foil.map((e) => {
           return stim_ids.indexOf(e)
         }),
-        familiar_side: foo[1],
-        first_side: first_side_2[tmp],
+        familiar_side: first_side_2[tmp],
+        first_side: bar[tmp],
       })
 
       tmp++
@@ -260,12 +222,12 @@ export default function makeTrials(debug) {
   trial_list.push({
     trial_type: 'test',
     attn: true,
-    familiar_triplet: foil_triplets[0],
-    familiar_indices: foil_triplets[0].map(e => {
+    familiar_pair: foil_pairs[0].join(''),
+    familiar_indices: foil_pairs[0].map((e) => {
       return stim_ids.indexOf(e)
     }),
-    foil_triplet: practice_stim.slice(0, 3),
-    foil_indices: practice_stim.slice(0, 3).map(e => {
+    foil_pair: practice_stim.slice(0, 2).join(''),
+    foil_indices: practice_stim.slice(0, 2).map((e) => {
       return stim_ids.indexOf(e)
     }),
     familiar_side: 'left',
@@ -280,12 +242,12 @@ export default function makeTrials(debug) {
   trial_list.push({
     trial_type: 'test',
     attn: true,
-    familiar_triplet: foil_triplets[1],
-    familiar_indices: foil_triplets[1].map(e => {
+    familiar_pair: foil_pairs[1].join(''),
+    familiar_indices: foil_pairs[1].map((e) => {
       return stim_ids.indexOf(e)
     }),
-    foil_triplet: practice_stim.slice(3, 6),
-    foil_indices: practice_stim.slice(3, 6).map(e => {
+    foil_pair: practice_stim.slice(2, 4).join(''),
+    foil_indices: practice_stim.slice(2, 4).map((e) => {
       return stim_ids.indexOf(e)
     }),
     familiar_side: 'right',
@@ -294,11 +256,11 @@ export default function makeTrials(debug) {
   })
 
   if (debug) {
-    trial_list.splice(-28, 28)
+    trial_list.splice(-14, 14)
   }
   return {
     trials: trial_list,
-    familiar_triplets: familiar_triplets,
-    foil_triplets: foil_triplets,
+    familiar_pairs: familiar_pairs,
+    foil_pairs: foil_pairs,
   }
 }
