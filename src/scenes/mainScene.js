@@ -27,7 +27,7 @@ export default class MainScene extends Phaser.Scene {
 
   preload() {
     this.exp_info = makeTrials(this.game.user_config.debug)
-    console.log(this.exp_info)
+    // console.log(this.exp_info)
   }
 
   create() {
