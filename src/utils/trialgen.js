@@ -13,7 +13,6 @@ For practice/exposure:
     trial_type (instruct, practice, exposure, test)
     stimulus_index (stimulus shown, 0-23)
     stimulus_id (A, B, C, ...)
-    cover_vis (true or false)
     exposure_time (millis)
     feedback_time (millis or null) (if null, no feedback)
     iti_time (millis)
@@ -66,62 +65,13 @@ export default function makeTrials(debug) {
   //
   let trial_list = []
   let trial_counter = 0
-  // practice 1 (easy, online feedback)
-  trial_list.push({
-    trial_type: 'instruct',
-    instruct_type: 'initial_practice',
-    instruct_text:
-      'In this study, you will see a sequence of images. Whenever you see\n\n[img=noise]\n\n\non top of the image, press the [color=yellow]spacebar[/color].',
-  })
-  shuffleArray(practice_stim)
-  let tmp_inds = [1, 4, 7, 8]
-  for (let i of practice_stim) {
-    trial_list.push({
-      trial_type: 'practice',
-      stimulus_index: stim_ids.indexOf(i),
-      stimulus_id: i,
-      cover_vis: tmp_inds.includes(trial_counter),
-      exposure_time: 1500,
-      feedback_time: 500,
-      iti_time: 1000,
-      pair_id: null,
-      trial_number: trial_counter++,
-    })
-  }
-  if (debug) {
-    trial_list.splice(-7, 7)
-  }
-  // practice 2 (harder, no feedback)
-  trial_list.push({
-    trial_type: 'instruct',
-    instruct_type: 'faster_practice',
-    instruct_text:
-      'Great job! We will do one more practice round.\n\nThis time, the images will [color=yellow]change more quickly[/color]. Try your best to press the [color=yellow]spacebar[/color] whenever you see this image:\n\n[img=noise]\n\n\n ',
-  })
-  shuffleArray(practice_stim)
-  tmp_inds = [12, 13, 15, 16]
-  for (let i of practice_stim) {
-    trial_list.push({
-      trial_type: 'practice',
-      stimulus_index: stim_ids.indexOf(i),
-      stimulus_id: i,
-      cover_vis: tmp_inds.includes(trial_counter),
-      exposure_time: 500,
-      feedback_time: null,
-      iti_time: 500,
-      pair_id: null,
-      trial_number: trial_counter++,
-    })
-  }
-  if (debug) {
-    trial_list.splice(-7, 7)
-  }
+
   // exposure
   trial_list.push({
     trial_type: 'instruct',
     instruct_type: 'exposure',
     instruct_text:
-      'Excellent, just two sections to go.\n\nThis next section will be the same as the previous section, except we will show many images (should take about five minutes).',
+      'In this study, we will show you a series of images and later ask you questions about those images. This first section will take about five minutes.',
   })
   // generate order of pairs
   // no restrictions on order
@@ -145,7 +95,6 @@ export default function makeTrials(debug) {
         trial_type: 'exposure',
         stimulus_index: stim_ids.indexOf(stim_idx),
         stimulus_id: stim_idx,
-        cover_vis: cover_arr[cover_counter++],
         exposure_time: 500,
         feedback_time: null,
         iti_time: 500,
@@ -162,7 +111,7 @@ export default function makeTrials(debug) {
     trial_type: 'instruct',
     instruct_type: 'test',
     instruct_text:
-      'This last section will be different.\n\nWe will show you two sequences of images, one on the [color=#9FC0DE]left[/color] side and one on the [color=#F2C894]right[/color].\n\nIf you think the sequence of images shown on the [color=#9FC0DE]left[/color] are more [color=yellow]familiar[/color], click the [color=#9FC0DE]left arrow[/color] key. If you think the sequence of images on the [color=#F2C894]right[/color] are more [color=yellow]familiar[/color], click the [color=#F2C894]right arrow[/color].\n\nDo not be afraid to guess!',
+      'In this last section, we will show you two sequences of images, one on the [color=#9FC0DE]left[/color] side and one on the [color=#F2C894]right[/color].\n\nIf you think the sequence of images shown on the [color=#9FC0DE]left[/color] are more [color=yellow]familiar[/color], click the [color=#9FC0DE]left arrow[/color] key. If you think the sequence of images on the [color=#F2C894]right[/color] are more [color=yellow]familiar[/color], click the [color=#F2C894]right arrow[/color].\n\nDo not be afraid to guess!',
   })
 
   // all combinations of familiar x foil, repeated twice (for 32 total trials)

@@ -12,7 +12,6 @@ export default class TitleScene extends Phaser.Scene {
     })
     this.load.image('check', 'assets/check_small.png')
     this.load.image('x', 'assets/x_small.png')
-    this.load.image('noise', 'assets/white_noise.png')
     this.load.image('arrow', 'assets/arrow.png')
   }
   create() {
@@ -21,17 +20,22 @@ export default class TitleScene extends Phaser.Scene {
     let user_config = this.game.user_config
 
     let start_txt = this.add
-      .rexBBCodeText(center, center, '[b]Click to start.[/b]\n\nThis will enter fullscreen mode.\n\nPlease remain in fullscreen mode until the end of the experiment.\n\nYou will not be able to pause after starting.', {
-        fontFamily: 'Verdana',
-        fontStyle: 'bold',
-        fontSize: 40,
-        wrap: {
-          mode: 'word',
-          width: 650,
-          useAdvancedWrap: true,
-        },
-        align: 'center',
-      })
+      .rexBBCodeText(
+        center,
+        center,
+        '[b]Click to start.[/b]\n\nThis will enter fullscreen mode.\n\nPlease remain in fullscreen mode until the end of the experiment.\n\nYou will not be able to pause after starting.',
+        {
+          fontFamily: 'Verdana',
+          fontStyle: 'bold',
+          fontSize: 40,
+          wrap: {
+            mode: 'word',
+            width: 650,
+            useAdvancedWrap: true,
+          },
+          align: 'center',
+        }
+      )
       .setOrigin(0.5, 0.5)
 
     this.flash = this.tweens.add({

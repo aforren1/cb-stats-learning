@@ -19,7 +19,6 @@ export default class MainScene extends Phaser.Scene {
     // these line up with trial_type
     this.all_data = {
       instruct: [],
-      practice: [],
       exposure: [],
       test: [],
     }
@@ -69,17 +68,6 @@ export default class MainScene extends Phaser.Scene {
       .setOrigin(0.5, 0.5)
     this.start_txt.visible = false
 
-    this.practice_txt = this.add
-      .rexBBCodeText(0, 300, 'Press the [color=yellow]spacebar[/color]\nwhen you see [img=noise]', {
-        fontFamily: 'Verdana',
-        fontStyle: 'bold',
-        fontSize: 40,
-        color: '#dddddd',
-        align: 'center',
-      })
-      .setOrigin(0.5, 0.5)
-      .setVisible(false)
-
     this.fixation = this.add
       .text(0, 0, '+', {
         fontFamily: 'Verdana',
@@ -90,7 +78,6 @@ export default class MainScene extends Phaser.Scene {
       .setVisible(false)
 
     this.stim = this.add.sprite(0, 0, 'stimuli').setVisible(false) // this is 250px then
-    this.noise = this.add.image(0, 0, 'noise').setScale(0.75).setVisible(false)
 
     this.check = this.add.image(0, 0, 'check').setScale(2).setVisible(false)
     this.x = this.add.image(0, 0, 'x').setScale(2).setVisible(false)
@@ -232,21 +219,15 @@ export default class MainScene extends Phaser.Scene {
       case states.EXPOSURE:
         if (this.entering) {
           this.entering = false
-          if (this.current_trial.trial_type === 'practice') {
-            this.practice_txt.visible = true
-          }
           // empty out space queue
           this.space_timestamps = []
           let trial_start_time = window.performance.now()
           // set the frame
           this.stim.setVisible(true).setFrame(current_trial.stimulus_index)
-          // show the cover?
-          this.noise.setVisible(current_trial.cover_vis)
 
           this.time.delayedCall(current_trial.exposure_time, () => {
             // turn off noise & stim
             this.stim.visible = false
-            this.noise.visible = false
             // (optional) show feedback
             if (current_trial.feedback_time) {
               let feedback_stim = this.x
@@ -281,7 +262,6 @@ export default class MainScene extends Phaser.Scene {
               })
               this.next_trial()
               this.fixation.visible = false
-              this.practice_txt.visible = false
             })
           })
           // empty out space queue
