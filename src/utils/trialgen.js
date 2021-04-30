@@ -205,7 +205,7 @@ export default function makeTrials(debug) {
   })
 
   if (debug) {
-    trial_list.splice(-14, 14)
+    trial_list.splice(-18, 18)
   }
   return {
     trials: trial_list,

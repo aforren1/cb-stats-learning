@@ -1,0 +1,40 @@
+subject: Participate in Online Research Study -- Statistical Learning
+
+Dear BLANK,
+
+My name is Alex Forrence, and I am a researcher at Yale University. We 
+are working with [Ivry Lab name?] on a new study, continuing with our 
+research on [subject matter] in [disease]. We are contacting you because 
+you have participated in a previous study with [Ivry Lab].
+
+This new study will be conducted online, meaning that it can be 
+completed from your home computer. You would access the experiment via 
+the internet, connecting to a secure computer system. The responses 
+would be with your keyboard. For this study, we ask that you complete 
+one session. The session will take approximately [time] minutes. A nice 
+feature of online testing is that you can complete the experiment 
+whenever it is convenient for you.
+
+We want to emphasize that this research will not interfere with any 
+ongoing medical treatment nor is there any direct benefit to you.
+
+To emphasize that this is part of an experimental research program, you 
+will be reimbursed for your participation. For this study, we will be 
+paying you $10. We will send payment through [pay method indicated in 
+DB].
+
+If you are interested in participating, please click the link below when 
+you are ready to start the experiment:
+
+[LINK]
+
+If you have any questions, please respond to this email. You can also 
+call me at (240) 409-2575.
+
+Thank you for your consideration.
+
+Alex Forrence
+Postgraduate, Yale University Psychology
+alexander.forrence@yale.edu
+(240) 409-2575
+

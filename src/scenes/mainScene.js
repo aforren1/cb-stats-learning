@@ -119,11 +119,10 @@ export default class MainScene extends Phaser.Scene {
       .setVisible(false)
 
     this.complete_txt = this.add
-      .text(0, 0, 'COMPLETE', {
-        fontSize: 100,
+      .text(0, 0, 'Complete,\nplease wait...', {
+        fontSize: 80,
         fontFamily: 'Arial',
         fontStyle: 'italic',
-        fill: false,
         align: 'center',
         padding: {
           left: 8,
@@ -132,12 +131,12 @@ export default class MainScene extends Phaser.Scene {
           bottom: 8,
         },
         strokeThickness: 2,
-        shadow: {
-          blur: 10,
-          color: '#00ff00',
-          stroke: true,
-          fill: true,
-        },
+        // shadow: {
+        //   blur: 4,
+        //   color: '#00ff00',
+        //   stroke: true,
+        //   fill: true,
+        // },
       })
       .setOrigin(0.5, 0.5)
       .setVisible(false)
@@ -434,12 +433,15 @@ export default class MainScene extends Phaser.Scene {
         if (this.entering) {
           this.entering = false
           this.complete_txt.visible = true
-          this.details.visible = true
+
           this.scale.stopFullscreen()
           let data = {
             config: this.game.user_config,
             data: this.all_data,
             mapping: { familiar: this.exp_info.familiar_pairs, foil: this.exp_info.foil_pairs },
+          }
+          if (data.config.is_prolific) {
+            this.details.visible = true
           }
           let url = 'https://google.com/?cc='
           if (data.config.is_prolific) {
@@ -452,7 +454,11 @@ export default class MainScene extends Phaser.Scene {
               delay = 1000
             }
             this.time.delayedCall(delay, () => {
-              window.location.href = url + '10A2899D'
+              if (data.config.is_prolific) {
+                window.location.href = url + '10A2899D'
+              } else {
+                this.complete_txt.text = 'You may now\nclose this window.'
+              }
             })
           })
         }
