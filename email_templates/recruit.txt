@@ -1,40 +1,27 @@
-subject: Participate in Online Research Study -- Statistical Learning
+subject: Participate in Yale-UC Berkeley Online Research Study - Statistical Learning
 
-Dear BLANK,
+Dear [NAME HERE],
 
-My name is Alex Forrence, and I am a researcher at Yale University. We 
-are working with [Ivry Lab name?] on a new study, continuing with our 
-research on [subject matter] in [disease]. We are contacting you because 
-you have participated in a previous study with [Ivry Lab].
+My name is Alex Forrence, and I am a researcher at Yale University. We are working with Rich Ivry from UC, Berkeley on a new study. We are contacting you because you have participated in a previous study with Dr. Ivry.
 
-This new study will be conducted online, meaning that it can be 
-completed from your home computer. You would access the experiment via 
-the internet, connecting to a secure computer system. The responses 
-would be with your keyboard. For this study, we ask that you complete 
-one session. The session will take approximately [time] minutes. A nice 
-feature of online testing is that you can complete the experiment 
-whenever it is convenient for you.
+This new study, which continues our research on human performance, is focused on understanding how people learn things from their environment. 
 
-We want to emphasize that this research will not interfere with any 
-ongoing medical treatment nor is there any direct benefit to you.
+We hope that this work will, in the long run, prove beneficial to physicians by increasing our knowledge of how movement and cognition are processed in the brain and how it can be affected by different neural disorders.
 
-To emphasize that this is part of an experimental research program, you 
-will be reimbursed for your participation. For this study, we will be 
-paying you $10. We will send payment through [pay method indicated in 
-DB].
+*This new study will be conducted online, meaning that it can be completed from your home computer*. You would access the experiment via the internet, connecting to a secure computer system. You would make responses with your computer keyboard.
 
-If you are interested in participating, please click the link below when 
-you are ready to start the experiment:
+For this study, we ask that you complete one session. *The session will take approximately 15 minutes*. A nice feature of online testing is that you can complete the experiment whenever is convenient for you.
+
+We want to emphasize that this research will not interfere with any ongoing medical treatment nor is there any direct benefit to you.
+
+For this study, we will be paying you $[MONEY]. We will send payment through [pay method indicated in DB] (or let me know if you would like to be paid with a different method).
+
+If you are interested in participating, please *click the link below* when you are ready to start the experiment:
 
 [LINK]
 
-If you have any questions, please respond to this email. You can also 
-call me at (240) 409-2575.
+If you have any questions, please respond to this email or call me at (240) 409-2575.
 
 Thank you for your consideration.
 
 Alex Forrence
-Postgraduate, Yale University Psychology
-alexander.forrence@yale.edu
-(240) 409-2575
-
