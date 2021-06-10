@@ -17,7 +17,16 @@ module.exports = {
     extensions: ['.js'],
   },
   module: {
-    rules: [{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }],
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env'],
+        },
+      },
+    ],
   },
   optimization: {
     splitChunks: {
