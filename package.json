@@ -4,6 +4,7 @@
     "description": "",
     "homepage": "",
     "main": "src/game.js",
+    "browserslist": "> 0.25%, not dead",
     "scripts": {
         "start": "webpack serve --config webpack/webpack.dev.js",
         "build": "webpack --mode production --config webpack/webpack.prod.js",
@@ -62,7 +63,6 @@
         "form-data": "^4.0.0",
         "isomorphic-fetch": "^3.0.0",
         "mailgun.js": "^3.2.0",
-        "netlify-cli": "^3.10.9",
         "netlify-lambda": "^2.0.3",
         "npm": "^7.6.2",
         "phaser": "3.24.1",
