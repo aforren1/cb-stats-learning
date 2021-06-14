@@ -12,7 +12,7 @@ Couple of TODOs:
 exports.handler = async (event, context) => {
   // create client w/ secret
   const client = new faunadb.Client({
-    secret: process.env.FAUNADB_SERVER_SECRET_PAIR_NOCOVER,
+    secret: process.env.FAUNADB_SERVER_SECRET_PATIENT_V1,
   })
   const data_in = JSON.parse(event.body)
   return client
