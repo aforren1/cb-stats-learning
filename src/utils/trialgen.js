@@ -71,7 +71,7 @@ export default function makeTrials(debug) {
     trial_type: 'instruct',
     instruct_type: 'exposure',
     instruct_text:
-      'In this study, we will show you a series of images and later ask you questions about those images.\n\nWe will first show you the series of images, which will take about five minutes.',
+      'In this study, we will show you a series of images and later ask you questions about those images.\n\nWe will first show you the series of images, which will take about five minutes.\n\nThe sequence is [b][color=yellow]very repetitive[/color][/b], but [b][color=yellow]please keep watching closely[/color][/b] all the way through the five minutes.',
   })
   // generate order of pairs
   // no restrictions on order
