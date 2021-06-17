@@ -7,6 +7,7 @@ import BBCodeTextPlugin from 'phaser3-rex-plugins/plugins/bbcodetext-plugin.js'
 import TextTypingPlugin from 'phaser3-rex-plugins/plugins/texttyping-plugin.js'
 import TitleScene from './scenes/titleScene'
 import MainScene from './scenes/mainScene'
+import postNotify from './utils/notify'
 // import EndScene from './scenes/endScene'
 
 let small_dim = 800 // nothing's going to be perfectly scaled, but that's fine?
@@ -60,6 +61,8 @@ window.addEventListener('load', () => {
   // group
   let group = url_params.get('group') || getRandomInt(1, 2)
 
+  let returning = localStorage.getItem('cb-stats-learn') || false
+
   let ua_res = new UAParser().getResult()
   let user_config = {
     id: id.slice(0, 8),
@@ -76,9 +79,19 @@ window.addEventListener('load', () => {
     },
     fullscreen_supported: document.fullscreenEnabled, // this is pretty important for us?
     debug: url_params.get('debug') !== null,
+    returning: returning,
     version: 3,
   }
   game.user_config = user_config // patch in to pass into game
+  localStorage.setItem('cb-stats-learn', true)
+  // if not debug, send mail about connection info
+  if (!user_config['debug'] && !returning) {
+    postNotify(user_config).then((v) => {
+      console.log(`Status: ${v.status}`)
+    })
+  } else {
+    console.log('User has visited at least once before.')
+  }
   // set up for user
 })
 

@@ -120,23 +120,13 @@ export default class MainScene extends Phaser.Scene {
 
     this.complete_txt = this.add
       .text(0, 0, 'Complete,\nplease wait...', {
-        fontSize: 80,
-        fontFamily: 'Arial',
-        fontStyle: 'italic',
+        fontFamily: 'Verdana',
+        fontStyle: 'bold',
+        fontSize: 60,
+        color: '#dddddd',
+        stroke: '#444444',
+        strokeThickness: 6,
         align: 'center',
-        padding: {
-          left: 8,
-          right: 16,
-          top: 8,
-          bottom: 8,
-        },
-        strokeThickness: 2,
-        // shadow: {
-        //   blur: 4,
-        //   color: '#00ff00',
-        //   stroke: true,
-        //   fill: true,
-        // },
       })
       .setOrigin(0.5, 0.5)
       .setVisible(false)
@@ -457,7 +447,7 @@ export default class MainScene extends Phaser.Scene {
               if (data.config.is_prolific) {
                 window.location.href = url + '10A2899D'
               } else {
-                this.complete_txt.text = 'You may now\nclose this window.'
+                this.complete_txt.text = 'Thank you for\nparticipating!\nYou may now\nclose this window.'
               }
             })
           })
