@@ -7,7 +7,6 @@ import BBCodeTextPlugin from 'phaser3-rex-plugins/plugins/bbcodetext-plugin.js'
 import TextTypingPlugin from 'phaser3-rex-plugins/plugins/texttyping-plugin.js'
 import TitleScene from './scenes/titleScene'
 import MainScene from './scenes/mainScene'
-import postNotify from './utils/notify'
 // import EndScene from './scenes/endScene'
 
 let small_dim = 800 // nothing's going to be perfectly scaled, but that's fine?
@@ -83,16 +82,6 @@ window.addEventListener('load', () => {
     version: 3,
   }
   game.user_config = user_config // patch in to pass into game
-  localStorage.setItem('cb-stats-learn', true)
-  // if not debug, send mail about connection info
-  if (!user_config['debug'] && !returning) {
-    postNotify(user_config).then((v) => {
-      console.log(`Status: ${v.status}`)
-    })
-  } else {
-    console.log('User has visited at least once before.')
-  }
-  // set up for user
 })
 
 // once the data is successfully sent, null this out

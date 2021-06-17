@@ -1,3 +1,5 @@
+import postNotify from '../utils/notify'
+
 export default class TitleScene extends Phaser.Scene {
   constructor() {
     super({ key: 'TitleScene' })
@@ -15,9 +17,10 @@ export default class TitleScene extends Phaser.Scene {
     this.load.image('arrow', 'assets/arrow.png')
   }
   create() {
+    let user_config = this.game.user_config
+
     let height = this.game.config.height
     let center = height / 2
-    let user_config = this.game.user_config
 
     let start_txt = this.add
       .rexBBCodeText(
@@ -50,6 +53,17 @@ export default class TitleScene extends Phaser.Scene {
     // we do a pointer event so that it counts as a page interaction (& fullscreen
     // is allowed to kick in)
     this.input.once('pointerdown', (evt) => {
+      // if they've gotten this far, they've visited
+      localStorage.setItem('cb-stats-learn', true)
+      // if not debug and not a return visit, send mail about connection info
+      if (!user_config['debug'] && !user_config['returning']) {
+        postNotify(user_config).then((v) => {
+          console.log(`Status: ${v.status}`)
+        })
+      } else {
+        console.log('User has visited at least once before.')
+      }
+
       // https://supernapie.com/blog/hiding-the-mouse-in-a-ux-friendly-way/
       // we don't need the cursor, but we also don't need pointer lock or the like
       let canvas = this.sys.canvas
