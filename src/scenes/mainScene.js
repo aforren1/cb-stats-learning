@@ -140,10 +140,10 @@ export default class MainScene extends Phaser.Scene {
       .setOrigin(0.5, 0.5)
       .setVisible(false)
     this.space_timestamps = []
-    this.input.keyboard.on('keydown-SPACE', (evt) => {
-      // capture all space events, and dole out to whatever needs them
-      this.space_timestamps.push(evt.timeStamp)
-    })
+    // this.input.keyboard.on('keydown-SPACE', (evt) => {
+    //   // capture all space events, and dole out to whatever needs them
+    //   this.space_timestamps.push(evt.timeStamp)
+    // })
   }
 
   update() {
@@ -240,10 +240,10 @@ export default class MainScene extends Phaser.Scene {
                 stimulus_id: current_trial.stimulus_id,
                 cover_vis: current_trial.cover_vis,
                 exposure_time: current_trial.exposure_time,
-                feedback_time: current_trial.feedback_time,
+                //feedback_time: current_trial.feedback_time,
                 iti_time: current_trial.iti_time,
                 trial_start_time: trial_start_time,
-                press_times: this.space_timestamps.length > 0 ? this.space_timestamps.slice() : null,
+                //press_times: this.space_timestamps.length > 0 ? this.space_timestamps.slice() : null,
                 trial_number: current_trial.trial_number,
               })
               this.next_trial()
