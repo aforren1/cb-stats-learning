@@ -79,9 +79,6 @@ export default class MainScene extends Phaser.Scene {
 
     this.stim = this.add.sprite(0, 0, 'stimuli').setVisible(false) // this is 250px then
 
-    this.check = this.add.image(0, 0, 'check').setScale(2).setVisible(false)
-    this.x = this.add.image(0, 0, 'x').setScale(2).setVisible(false)
-
     this.divider = this.add.rectangle(0, 0, 4, height * 0.66, 0xffffff).setVisible(false)
 
     this.test_txt = this.add
@@ -218,23 +215,23 @@ export default class MainScene extends Phaser.Scene {
             // turn off noise & stim
             this.stim.visible = false
             // (optional) show feedback
-            if (current_trial.feedback_time) {
-              let feedback_stim = this.x
-              if (current_trial.cover_vis && this.space_timestamps.length > 0) {
-                // good
-                feedback_stim = this.check
-              } else if (!current_trial.cover_vis && this.space_timestamps.length === 0) {
-                // good
-                feedback_stim = this.check
-              }
-              feedback_stim.visible = true
-              this.time.delayedCall(current_trial.feedback_time, () => {
-                feedback_stim.visible = false
-                this.fixation.visible = true
-              })
-            } else {
-              this.fixation.visible = true
-            }
+            // if (current_trial.feedback_time) {
+            //   let feedback_stim = this.x
+            //   if (current_trial.cover_vis && this.space_timestamps.length > 0) {
+            //     // good
+            //     feedback_stim = this.check
+            //   } else if (!current_trial.cover_vis && this.space_timestamps.length === 0) {
+            //     // good
+            //     feedback_stim = this.check
+            //   }
+            //   feedback_stim.visible = true
+            //   this.time.delayedCall(current_trial.feedback_time, () => {
+            //     feedback_stim.visible = false
+            //     this.fixation.visible = true
+            //   })
+            // } else {
+            this.fixation.visible = true
+            // }
 
             this.time.delayedCall(current_trial.iti_time, () => {
               this.all_data[current_trial.trial_type].push({

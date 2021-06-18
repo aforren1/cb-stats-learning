@@ -12,8 +12,6 @@ export default class TitleScene extends Phaser.Scene {
       endFrame: 23,
       spacing: 4,
     })
-    this.load.image('check', 'assets/check_small.png')
-    this.load.image('x', 'assets/x_small.png')
     this.load.image('arrow', 'assets/arrow.png')
   }
   create() {
